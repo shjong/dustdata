@@ -1,0 +1,22 @@
+
+const express = require('express');
+const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+
+app.use('/data', function(req,res,next) {
+        console.log("someone hit us with",req.query);
+        res.json(req.query);
+});
+
+
+
+app.use(express.static('./'), function() {
+	console.log("does someone hit the route?");
+});
+
+
+server.listen( 2580, function() {
+	console.log("Port 2580 is open for business!");
+});
+

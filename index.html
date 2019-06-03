@@ -1,0 +1,39 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ 	<div id="container">
+  
+	<div id="text"> Dust level : </div>
+	<div id="data">	   </div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script> var socket = io();
+		socket.on('connect', function () {
+       			console.log('Connected to server');
+   		});	
+		
+		socket.on('data', function(payload) {
+			console.log("payload:", payload);
+			document.getElementById("data").innerHTML = Number(payload).toFixed(1);
+			var color ='green';
+                 	if (payload>30){
+		    		color ='red';
+			}
+			else if (payload>10){
+				color ='yellow';
+			} 	
+			document.body.style.backgroundColor=color;	
+			
+
+		});
+
+		
+
+	</script>	
+	</div>
+
+</body>
+</html>
